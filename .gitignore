@@ -1,10 +1,38 @@
-.env
-data
-logs
-!tests/data
-*/__pycache__/
-.pyc
-*.pickle
+# Python cache
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE
 .idea/
-custom_modules/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+*.old
+
+# Data backups (keep main data)
+ats/data_backup_*/
+ats/data/*.backup
+
+# Model checkpoints (keep structure, not files)
+custom_modules/strategies/*/saved_models/run_*/
+custom_modules/strategies/*/transitions/
+
+# Environment (optional - comment out if you want to commit .env)
+# .env

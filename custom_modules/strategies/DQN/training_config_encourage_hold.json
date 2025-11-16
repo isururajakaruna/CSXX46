@@ -1,0 +1,77 @@
+{
+  "_comment": "=== DQN TRAINING CONFIG - Encourage HOLD Behavior ===",
+  
+  "exchange": {
+    "config": {
+      "extra": {
+        "data_source": "ats/data/BTC_USDT_short.csv",
+        "fees": {
+          "config": {
+            "limit": {
+              "buy": {"base": 0, "quote": 0},
+              "sell": {"base": 0, "quote": 0}
+            },
+            "market": {
+              "buy": {"base": 0.1, "quote": 0},
+              "sell": {"base": 0, "quote": 0.1}
+            }
+          },
+          "namespace": "fees:generic"
+        },
+        "min_trading_size": 0.0001,
+        "wallet": {
+          "assets": {
+            "BTC": 0,
+            "USDT": 10000
+          }
+        }
+      },
+      "plot_data_max_len": -1,
+      "symbol": {
+        "base": "BTC",
+        "quote": "USDT"
+      }
+    },
+    "namespace": "exchanges:back_trading"
+  },
+  
+  "strategy": {
+    "config": {
+      "base_symbol": "BTC",
+      "quote_symbol": "USDT",
+      
+      "training_mode": true,
+      "epsilon": 1.0,
+      "decision_interval": 1,
+      
+      "order_value_pct": 10,
+      "max_position_size": 1.0,
+      "log_trade_activity": true,
+      
+      "use_indicators": true,
+      "ma_window": 20,
+      "rsi_window": 14,
+      
+      "reward_config": {
+        "_comment": "=== REWARD SHAPING TO ENCOURAGE HOLD ===",
+        
+        "reward_type": "shaped",
+        "_reward_type_options": "simple | shaped | sharpe",
+        
+        "penalty_trade": 0.5,
+        "_penalty_trade_note": "Penalty for any trade (BUY/SELL). Higher = less trading. Range: 0.1-5.0",
+        
+        "penalty_hold": -0.1,
+        "_penalty_hold_note": "Penalty/bonus for HOLD. Negative = bonus! Range: -0.5 to 0.0",
+        
+        "penalty_flip": 1.0,
+        "_penalty_flip_note": "Penalty for flip (BUY→SELL or SELL→BUY). Range: 0.5-5.0",
+        
+        "reward_scale": 1.0,
+        "_reward_scale_note": "Scale all rewards by this factor. Default: 1.0"
+      }
+    },
+    "namespace": "strategies:DQN"
+  }
+}
+

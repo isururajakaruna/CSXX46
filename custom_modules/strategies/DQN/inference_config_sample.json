@@ -1,0 +1,33 @@
+{
+  "job_name": "DQN_Trading_Inference",
+  "strategy": "DQN",
+  "base_symbol": "BTC",
+  "quote_symbol": "USDT",
+  "data_source": "ats/data/BTC_USDT_short.csv",
+  "initial_quote_balance": 10000,
+  "initial_base_balance": 0,
+  
+  "strategy_config": {
+    "training_mode": false,
+    "model_path": "custom_modules/strategies/DQN/saved_models/run_20251111_232359/dqn_final.pth",
+    "epsilon": 0.0,
+    "decision_interval": 5,
+    
+    "order_value_pct": 10,
+    "max_position_size": 1.0,
+    "log_trade_activity": true,
+    
+    "use_indicators": true,
+    "ma_window": 20,
+    "rsi_window": 14,
+    
+    "reward_config": {
+      "use_reward": true,
+      "reward_type": "pnl_pct",
+      "penalty_hold": 0.0,
+      "penalty_flip": 0.0,
+      "reward_scale": 1.0
+    }
+  }
+}
+

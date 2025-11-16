@@ -1,0 +1,53 @@
+[
+  {
+    "cols": 1,
+    "length": -1,
+    "name": "Price & Indicators",
+    "plot_compressed": true,
+    "plot_compressed_size": 10000,
+    "plots": [
+      {
+        "col": 1,
+        "row": 1,
+        "topic": "Candle Close Price"
+      },
+      {
+        "col": 1,
+        "row": 1,
+        "topic": "Moving Average"
+      },
+      {
+        "col": 1,
+        "row": 1,
+        "topic": "MARKET Order Completed: Buy"
+      },
+      {
+        "col": 1,
+        "row": 1,
+        "topic": "MARKET Order Completed: Sell"
+      },
+      {
+        "col": 1,
+        "row": 2,
+        "topic": "RSI"
+      }
+    ],
+    "rows": 2
+  },
+  {
+    "cols": 1,
+    "length": -1,
+    "name": "Equity",
+    "plot_compressed": true,
+    "plot_compressed_size": 10000,
+    "plots": [
+      {
+        "col": 1,
+        "row": 1,
+        "topic": "Total Equity"
+      }
+    ],
+    "rows": 1
+  }
+]
+

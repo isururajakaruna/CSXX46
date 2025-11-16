@@ -1,0 +1,11 @@
+# Real-time Training Monitor Dependencies
+# Install with: pip install -r requirements_monitor.txt
+# Note: Using threading async mode instead of eventlet for Python 3.12 compatibility
+
+flask==3.0.0
+flask-socketio==5.3.5
+flask-cors==4.0.0
+python-socketio==5.10.0
+simple-websocket==1.0.0
+# eventlet==0.33.3  # Removed - incompatible with Python 3.12
+

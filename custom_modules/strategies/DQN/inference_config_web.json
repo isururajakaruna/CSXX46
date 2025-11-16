@@ -1,0 +1,73 @@
+{
+  "exchange": {
+    "config": {
+      "extra": {
+        "data_source": "ats/data/BTC_USDT_very_short.csv",
+        "fees": {
+          "config": {
+            "limit": {
+              "buy": {
+                "base": 0,
+                "quote": 0
+              },
+              "sell": {
+                "base": 0,
+                "quote": 0
+              }
+            },
+            "market": {
+              "buy": {
+                "base": 0.1,
+                "quote": 0
+              },
+              "sell": {
+                "base": 0,
+                "quote": 0.1
+              }
+            }
+          },
+          "namespace": "fees:generic"
+        },
+        "min_trading_size": 0.0001,
+        "wallet": {
+          "assets": {
+            "BTC": 0,
+            "USDT": 10000
+          }
+        }
+      },
+      "plot_data_max_len": -1,
+      "symbol": {
+        "base": "BTC",
+        "quote": "USDT"
+      }
+    },
+    "namespace": "exchanges:back_trading"
+  },
+  "strategy": {
+    "config": {
+      "base_symbol": "BTC",
+      "quote_symbol": "USDT",
+      
+      "training_mode": false,
+      "model_path": "custom_modules/strategies/DQN/saved_models/run_YYYYMMDD_HHMMSS/dqn_final.pth",
+      "_model_note": "👆 UPDATE THIS PATH after training completes! Check saved_models/ for your run_* folder",
+      "epsilon": 0.0,
+      "decision_interval": 5,
+      
+      "order_value_pct": 10,
+      "max_position_size": 1.0,
+      "log_trade_activity": true,
+      
+      "use_indicators": true,
+      "ma_window": 20,
+      "rsi_window": 14,
+      
+      "reward_config": {
+        "reward_type": "simple"
+      }
+    },
+    "namespace": "strategies:DQN"
+  }
+}
+

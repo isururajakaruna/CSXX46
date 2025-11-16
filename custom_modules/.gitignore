@@ -1,0 +1,71 @@
+# Temporary directories
+tmp_*/
+tmp/
+temp/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Training artifacts (DQN)
+strategies/rl_strategy/transitions/
+strategies/rl_strategy/saved_models/
+strategies/rl_strategy/training_logs/
+
+# Training artifacts (PPO)
+strategies/PPO/saved_models/
+strategies/PPO/training_logs/
+strategies/PPO/transitions/
+
+# Model files
+*.pth
+*.pt
+*.ckpt
+
+# Training outputs
+training_metrics.csv
+training_loss.csv
+training_stats_*.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Environment files
+.env
+.env.local
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+

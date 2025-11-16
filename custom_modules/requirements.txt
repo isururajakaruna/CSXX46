@@ -1,0 +1,56 @@
+# ============================================================================
+# DQN Trading System - Requirements
+# ============================================================================
+# Install with: pip install -r requirements.txt
+#
+# For conda users:
+#   conda create -n ats-nus-project python=3.11
+#   conda activate ats-nus-project
+#   pip install -r requirements.txt
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Core Deep Learning & Scientific Computing
+# ----------------------------------------------------------------------------
+torch>=2.0.0              # PyTorch for DQN neural networks
+numpy>=1.24.0             # Numerical computing
+pandas>=2.0.0             # Data manipulation
+scikit-learn>=1.3.0       # Machine learning utilities
+
+# ----------------------------------------------------------------------------
+# Visualization & Plotting
+# ----------------------------------------------------------------------------
+matplotlib>=3.7.0         # Plotting and visualization
+
+# ----------------------------------------------------------------------------
+# Real-Time Dashboard & Monitoring
+# ----------------------------------------------------------------------------
+flask>=3.0.0              # Web framework for dashboard
+flask-socketio>=5.3.0     # Real-time bidirectional communication
+python-socketio>=5.10.0   # Socket.IO client/server
+flask-cors>=4.0.0         # Cross-origin resource sharing
+requests>=2.31.0          # HTTP requests for API calls
+
+# ----------------------------------------------------------------------------
+# ATS Integration (Required by parent project)
+# ----------------------------------------------------------------------------
+# These are needed to connect with the ATS trading system
+pydantic>=2.0.0           # Data validation
+pyyaml>=6.0               # YAML configuration files
+python-dateutil>=2.8.0    # Date/time utilities
+
+# ----------------------------------------------------------------------------
+# Optional: Database & Storage (if using MongoDB features)
+# ----------------------------------------------------------------------------
+# pymongo>=4.5.0          # MongoDB driver (uncomment if needed)
+# motor>=3.3.0            # Async MongoDB driver (uncomment if needed)
+
+# ----------------------------------------------------------------------------
+# Optional: Additional Exchange Support
+# ----------------------------------------------------------------------------
+# ccxt>=4.0.0             # Cryptocurrency exchange integration (uncomment if needed)
+# websockets>=11.0        # WebSocket support (uncomment if needed)
+
+# ============================================================================
+# End of Requirements
+# ============================================================================

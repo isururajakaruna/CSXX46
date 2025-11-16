@@ -1,0 +1,88 @@
+{
+  "_comment_1": "=== DQN INFERENCE CONFIG (Web Interface) ===",
+  "_comment_2": "This config is for running trained DQN models via ATS web UI",
+  
+  "exchange": {
+    "config": {
+      "extra": {
+        "data_source": "ats/data/BTC_USDT_short.csv",
+        "_comment": "Relative path to CSV data file",
+        
+        "fees": {
+          "config": {
+            "limit": {
+              "buy": {"base": 0, "quote": 0},
+              "sell": {"base": 0, "quote": 0}
+            },
+            "market": {
+              "buy": {"base": 0.1, "quote": 0},
+              "sell": {"base": 0, "quote": 0.1}
+            }
+          },
+          "namespace": "fees:generic"
+        },
+        "min_trading_size": 0.0001,
+        "wallet": {
+          "assets": {
+            "BTC": 0,
+            "USDT": 10000
+          },
+          "_comment": "Initial balances"
+        }
+      },
+      "plot_data_max_len": -1,
+      "symbol": {
+        "base": "BTC",
+        "quote": "USDT"
+      }
+    },
+    "namespace": "exchanges:back_trading"
+  },
+  
+  "strategy": {
+    "config": {
+      "base_symbol": "BTC",
+      "quote_symbol": "USDT",
+      
+      "_inference_params": "=== INFERENCE PARAMETERS ===",
+      "training_mode": false,
+      "_training_mode_note": "MUST be false for inference",
+      
+      "model_path": "custom_modules/strategies/DQN/saved_models/run_20251111_232359/dqn_final.pth",
+      "_model_path_note": "Relative path to your trained .pth file",
+      
+      "epsilon": 0.0,
+      "_epsilon_note": "0.0 = greedy (no exploration), 0.1 = 10% random actions",
+      
+      "decision_interval": 5,
+      "_decision_interval_note": "Make trading decision every N candles (5 = every 5 candles, 1 = every candle)",
+      
+      "_trading_params": "=== TRADING PARAMETERS ===",
+      "order_value_pct": 10,
+      "_order_value_pct_note": "% of equity to use per trade",
+      
+      "max_position_size": 1.0,
+      "_max_position_size_note": "Max position size (1.0 = 100% of equity)",
+      
+      "log_trade_activity": true,
+      "_log_trade_activity_note": "Log each trade decision",
+      
+      "_indicator_params": "=== TECHNICAL INDICATORS ===",
+      "use_indicators": true,
+      "ma_window": 20,
+      "rsi_window": 14,
+      "_indicators_note": "Must match training config",
+      
+      "reward_config": {
+        "use_reward": true,
+        "reward_type": "pnl_pct",
+        "penalty_hold": 0.0,
+        "penalty_flip": 0.0,
+        "reward_scale": 1.0
+      }
+    },
+    "namespace": "strategies:DQN",
+    "_namespace_note": "Points to custom_modules/strategies/DQN/"
+  }
+}
+

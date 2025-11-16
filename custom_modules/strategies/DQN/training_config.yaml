@@ -1,0 +1,153 @@
+# DQN Trading Agent Training Configuration
+#
+# This file contains all hyperparameters for training the DQN agent
+
+# Training Parameters
+training:
+  num_episodes: 100               # Number of training episodes
+  save_freq: 10                    # Save model every N episodes
+  eval_freq: 20                    # Evaluate model every N episodes
+  log_freq: 1                      # Log progress every N episodes
+  max_steps_per_episode: 10000     # Maximum steps per episode (safety)
+  
+# DQN Agent Parameters
+agent:
+  state_dim: 7                     # State space dimension (price, volume, MA, RSI, wallet_ratio, position_value, cash)
+  action_dim: 3                    # Action space dimension (BUY, SELL, HOLD)
+  hidden_dims: [128, 64]           # Hidden layer dimensions
+  
+  # Learning parameters
+  learning_rate: 0.001             # Adam optimizer learning rate
+  gamma: 0.99                      # Discount factor for future rewards
+  
+  # Exploration parameters
+  epsilon_start: 1.0               # Initial exploration rate
+  epsilon_end: 0.05                # Minimum exploration rate
+  epsilon_decay: 0.995             # Epsilon decay per episode
+  
+  # Training parameters
+  buffer_capacity: 100000          # Replay buffer capacity
+  batch_size: 64                   # Training batch size
+  target_update_freq: 10           # Update target network every N episodes
+  min_buffer_size: 1000            # Minimum buffer size before training starts
+  
+  # Architecture options
+  use_dueling: false               # Use Dueling DQN architecture
+  use_prioritized_replay: false    # Use prioritized experience replay
+  
+  # Device
+  device: 'cpu'                    # 'cpu' or 'cuda'
+
+# Strategy Configuration
+strategy:
+  base_symbol: 'BTC'
+  quote_symbol: 'USDT'
+  
+  # Trading parameters
+  order_value_pct: 10              # Percentage of equity to use per order
+  max_position_size: 0.8           # Maximum position size (80% of portfolio)
+  
+  # Indicator parameters
+  use_indicators: true
+  ma_window: 20                    # Moving average window
+  rsi_window: 14                   # RSI window
+  
+  # Logging
+  log_trade_activity: false        # Log individual trades (disable during training for speed)
+
+# Exchange Configuration (Backtesting)
+exchange:
+  namespace: 'exchanges:back_trading'
+  
+  # Data source
+  data_source: 'ats/data/BTC_USDT_short.csv'  # Relative to ATS root
+  
+  # Initial wallet
+  wallet:
+    USDT: 10000                    # Starting cash
+    BTC: 0                         # Starting BTC
+  
+  # Trading parameters
+  min_trading_size: 0.0001         # Minimum trade size
+  
+  # Fee structure
+  fees:
+    namespace: 'fees:generic'
+    config:
+      limit:
+        buy:
+          base: 0.001              # 0.1% fee on base asset
+          quote: 0
+        sell:
+          base: 0
+          quote: 0.001
+      market:
+        buy:
+          base: 0.001
+          quote: 0
+        sell:
+          base: 0
+          quote: 0.001
+
+# Reward Function Configuration
+reward:
+  # Reward type: 'equity_change', 'sharpe_ratio', 'profit_factor', 'custom'
+  type: 'equity_change'
+  
+  # Equity change reward parameters
+  equity_change:
+    normalize: true                # Normalize by initial equity
+    scale: 1.0                     # Scale factor for reward
+  
+  # Optional: Penalty for holding too long without action
+  inactivity_penalty: 0.0          # Penalty per step for holding
+  
+  # Optional: Reward shaping
+  use_reward_shaping: false
+  reward_shaping:
+    trade_execution_reward: 0.01   # Small reward for executing trades
+    profit_bonus: 0.1              # Bonus multiplier for profitable trades
+    loss_penalty: 0.1              # Penalty multiplier for losing trades
+
+# Paths
+paths:
+  models_dir: 'models/dqn'         # Directory to save models
+  logs_dir: 'logs/dqn'             # Directory to save training logs
+  results_dir: 'results/dqn'       # Directory to save results
+
+# API Configuration
+api:
+  base_url: 'http://localhost:5010'
+  timeout: 300                     # Job timeout in seconds
+  retry_attempts: 3                # Number of retries for failed API calls
+  retry_delay: 5                   # Delay between retries (seconds)
+
+# Evaluation Configuration
+evaluation:
+  enabled: true
+  num_episodes: 5                  # Number of evaluation episodes
+  epsilon: 0.0                     # Use greedy policy for evaluation
+  save_results: true               # Save evaluation results
+  
+# Early Stopping
+early_stopping:
+  enabled: true
+  patience: 20                     # Stop if no improvement for N episodes
+  min_delta: 0.01                  # Minimum improvement threshold
+  metric: 'avg_reward'             # Metric to monitor ('avg_reward', 'avg_return', 'win_rate')
+
+# Checkpointing
+checkpointing:
+  save_best: true                  # Save best model based on eval performance
+  save_latest: true                # Save latest model
+  keep_n_checkpoints: 5            # Keep only N best checkpoints
+
+# Logging
+logging:
+  level: 'INFO'                    # Logging level (DEBUG, INFO, WARNING, ERROR)
+  tensorboard: false               # Enable TensorBoard logging
+  wandb: false                     # Enable Weights & Biases logging
+  
+# Random Seed
+seed: 42                           # Random seed for reproducibility
+

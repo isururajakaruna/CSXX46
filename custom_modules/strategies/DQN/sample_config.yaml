@@ -1,0 +1,71 @@
+# Sample configuration for RL Strategy with Backtesting
+# This configuration can be used to test the RL strategy with historical data
+
+exchange:
+  namespace: 'exchanges:back_trading'
+  config:
+    symbol:
+      quote: USDT
+      base: BTC
+
+    # Defines the size of the window for plot data. -1 means no limit
+    plot_data_max_len: -1
+
+    extra:
+      # Path to historical data CSV file
+      # Update this path to your actual data file
+      data_source: 'ats/data/BTC_USDT_short.csv'
+
+      # Initial wallet balances
+      wallet:
+        assets:
+          USDT: 10000  # Start with $10,000 USDT
+          BTC: 0       # Start with 0 BTC
+
+      # Minimum trading size (exchange constraint)
+      min_trading_size: 0.0001
+
+      # Fee configuration
+      fees:
+        namespace: 'fees:generic'
+        config:
+          limit:  # Limit order fees (0.1% maker fee)
+            buy:
+              quote: 0
+              base: 0.001
+            sell:
+              quote: 0.001
+              base: 0
+          market:  # Market order fees (0.1% taker fee)
+            buy:
+              quote: 0
+              base: 0.001
+            sell:
+              quote: 0.001
+              base: 0
+
+strategy:
+  namespace: 'strategies:DQN'
+  config:
+    # Asset symbols
+    base_symbol: 'BTC'
+    quote_symbol: 'USDT'
+    
+    # Trading parameters
+    order_value_pct: 10          # Use 10% of equity per trade
+    max_position_size: 0.8       # Maximum 80% position in base asset
+    
+    # Logging and debugging
+    log_trade_activity: true     # Enable detailed trade logging
+    
+    # Technical indicators
+    use_indicators: true         # Enable technical indicators
+    ma_window: 20                # Moving average period
+    rsi_window: 14               # RSI period
+    
+    # RL-specific parameters (customize based on your agent)
+    # learning_rate: 0.001
+    # gamma: 0.99
+    # epsilon: 0.1
+    # batch_size: 32
+
